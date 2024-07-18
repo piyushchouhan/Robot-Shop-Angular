@@ -1,14 +1,14 @@
 <div class="container">
     <div class="filters">
-      <a class="button">Heads</a>
-      <a class="button">Arms</a>
-      <a class="button">Torsos</a>
-      <a class="button">Bases</a>
-      <a class="button">All</a>
+      <a class="button" (click)="filter='Heads'">Heads</a>
+      <a class="button" (click)="filter='Arms'">Arms</a>
+      <a class="button" (click)="filter='Torsos'">Torsos</a>
+      <a class="button" (click)="filter='Bases'">Bases</a>
+      <a class="button" (click)="filter=''">All</a>
     </div>
   
     <ul class="products">
-      <li class="product-item" *ngFor = "let product of products">
+      <li class="product-item" *ngFor = "let product of getFilteredProducts()">
         <div class="product">
           <div class="product-details">
             <img src="{{getImageUrl(product)}}" [alt]="product.imageName" />
@@ -19,7 +19,10 @@
             </div>
           </div>
           <div class="price">
-            <div> ${{product.price.toFixed(2)}} </div>
+            <div [ngClass]="getDiscountedClasses(product)"> {{product.price | currency:'INR'}} </div>
+            <div *ngIf="product.discount > 0" class="discount">
+              {{(product.price*(1- product.discount)) | currency:'INR'}}
+            </div>
             <button class="cta">Buy</button>
           </div>
         </div>

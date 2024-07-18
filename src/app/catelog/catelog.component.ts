@@ -8,6 +8,7 @@ import { IProduct } from './product.model';
 })
 export class CatelogComponent {
     products : IProduct[];
+    filter : string = '';
 
     constructor() {
         this.products = [
@@ -187,7 +188,17 @@ export class CatelogComponent {
         ];
     }
 
+    getDiscountedClasses(product : IProduct){
+      if (product.discount > 0) return ['strikethrough'];
+      else return [];
+    }
+
     getImageUrl(product : IProduct){
         return '/assets/images/robot-parts/' + product.imageName ;
+    }
+
+    getFilteredProducts(){
+        return this.filter === ''
+        ? this.products : this.products.filter((product) => product.category === this.filter);
     }
 }
