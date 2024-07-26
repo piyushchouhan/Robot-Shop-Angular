@@ -5,16 +5,19 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CatelogComponent } from './catelog/catelog.component';
 import { SiteHeaderComponent } from './site-header/site-header.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CatelogComponent,
-    SiteHeaderComponent
+    SiteHeaderComponent,
+    ProductDetailsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
