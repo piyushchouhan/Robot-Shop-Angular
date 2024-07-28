@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IProduct } from './product.model';
-import { CartService } from '../cart.service';
+import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service';
 import { retry } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'bot-catelog',
@@ -15,13 +16,19 @@ export class CatelogComponent {
     filter : string = '';
 
     constructor(private cartSvc : CartService,
-      private productSVC :ProductService
+      private productSVC :ProductService,
+      private router : Router,
+      private route : ActivatedRoute
     ) {}
 
     ngOnInit(){
       this.productSVC.getProducts()
       .subscribe((prods) => {
         this.products = prods;
+      });
+      
+      this.route.params.subscribe((params) => {
+        this.filter = params['filter'] ?? '';
       });
     }
 
@@ -38,6 +45,7 @@ export class CatelogComponent {
 
     addToCart(product : IProduct) {
       this.cartSvc.add(product);
+      this.router.navigate(['/cart']);
     }
 }
 
