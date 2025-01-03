@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IProduct } from './product.model';
 import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service';
-import { retry } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -15,10 +14,11 @@ export class CatelogComponent {
     products : any;
     filter : string = '';
 
-    constructor(private cartSvc : CartService,
-      private productSVC :ProductService,
-      private router : Router,
-      private route : ActivatedRoute
+    constructor(
+      private readonly cartSvc : CartService,
+      private readonly productSVC :ProductService,
+      private readonly router : Router,
+      private readonly route : ActivatedRoute
     ) {}
 
     ngOnInit(){
@@ -27,7 +27,7 @@ export class CatelogComponent {
         this.products = prods;
       });
       
-      this.route.params.subscribe((params) => {
+      this.route.queryParams.subscribe((params) => {
         this.filter = params['filter'] ?? '';
       });
     }

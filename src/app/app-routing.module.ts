@@ -6,7 +6,7 @@ import { CartComponent } from './cart/cart.component';
 
 const routes : Routes = [
   {path : 'home' , component : HomeComponent, title : 'Home'},
-  {path : 'catalog/:filter' , component: CatelogComponent, title : 'Catalog'},
+  {path : 'catalog' , component: CatelogComponent, title : 'Catalog'},
   {path: 'cart', component: CartComponent, title: 'Cart'},
   {path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
@@ -19,3 +19,4 @@ const routes : Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+ 
